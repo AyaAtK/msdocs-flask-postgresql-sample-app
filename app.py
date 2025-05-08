@@ -38,29 +38,7 @@ def add_entry():
         return jsonify({'mensaje': 'Imagen registrada con éxito'}), 201
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-@app.route('/api/imagenes', methods=['GET'])
-def get_imagenes():
-    try:
-        imagenes = Imagen.query.all()  # Obtener todas las imágenes de la base de datos
-        imagenes_data = []
-        
-        # Convertir los registros de las imágenes en formato JSON
-        for imagen in imagenes:
-            imagen_data = {
-                'id': imagen.id,
-                'usuario': imagen.usuario,
-                'filename': imagen.filename,
-                'fecha': imagen.fecha.isoformat(),  # Convertir la fecha a formato ISO
-                'pixels': imagen.pixels
-            }
-            imagenes_data.append(imagen_data)
-
-        # Devolver los datos en formato JSON
-        return jsonify(imagenes_data), 200
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+  
 
 # Ruta principal para mostrar todas las imágenes en una tabla HTML
 @app.route('/')
